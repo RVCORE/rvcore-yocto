@@ -1,42 +1,32 @@
 
-content
-========
-1.download source code
-2.build full image
-3.run full image in qemu
-4.compile and run spec06-lite in full image
-5.build yinxing fpga image
-6.run yinxing fpga image using yocto qemu
-------------------------------
 
-
-1.download source code
-
-   At first make sure repo is working, then execute download_code.sh to pull down all opensource layer into current workdir.
+### 1.download source code
+```
+   #At first make sure repo is working, then execute download_code.sh to pull down all opensource layer into current workdir.
 
    $ ./download_code.sh
-
-2.build full image
-
-   prepare build environment
+```
+### 2.build full image
+```
+   #prepare build environment
 
    $ source meta-rvcore/setup.sh
 
-   build full image
+   #build full image
 
    $ MACHINE=qemuriscv64 bitbake rvcore-image-full-cmdline
-
-3.run full image in qemu
-
+```
+### 3.run full image in qemu
+```
    $ ../meta-rvcore/qemu_run_fullsystem.sh
-
-4.compile and run spec06-lite in full image
-
+```
+### 4.compile and run spec06-lite in full image
+```
    $ export PERL5LIB="/usr/lib/perl5/5.36.0/IO:/usr/lib/perl5/5.36.0/riscv64-linux"
 
    $ cpan HTTP/Request.pm
 
-   modify tools/util.pl
+   #modify tools/util.pl
 
    $ git diff tools/util.pl
    diff --git a/tools/util.pl b/tools/util.pl
@@ -59,9 +49,9 @@ content
 
    $ make -j 12 build-fp
    $ make -j 12 run-fp-ref
-
-5.build yinxing fpga image
-
+```
+### 5.build yinxing fpga image
+```
    $ MACHINE=yinxing-fpga bitbake virtual/kernel
 
    the following ELF file will be put into bbl.
@@ -73,8 +63,9 @@ content
    $ cd ..
    $ ./yocto-fpga-build.sh
    $ deliver ns-bbl-nanhu-fpga/build/linux.bin to fpga
-
-6.run yinxing fpga image using yocto qemu
-
+```
+### 6.run yinxing fpga image using yocto qemu
+```
    $ cd meta-rvcore/
    $ ./qemu_run_fpga.sh
+```
