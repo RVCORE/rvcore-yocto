@@ -57,12 +57,12 @@
    the following ELF file will be put into bbl.
    build/tmp-glibc/deploy/images/yinxing-fpga/vmlinux-initramfs-yinxing-fpga.bin
 
-   $ cd ns-bbl-nanhu-fpga/riscv-pk
+   $ cd bbl-yinxing-fpga/riscv-pk
    $ make clean
    $ make -f Makefile.yocto.fpga
    $ cd ..
    $ ./yocto-fpga-build.sh
-   $ deliver ns-bbl-nanhu-fpga/build/linux.bin to fpga
+   $ deliver bbl-yinxing-fpga/build/linux.bin to fpga
 ```
 ### 6.run yinxing fpga image using yocto qemu
 ```
