@@ -1,0 +1,2 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+BUSYBOX_SPLIT_SUID = "1"
