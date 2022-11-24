@@ -1,0 +1,22 @@
+From 33a3e9eb4d8fb38203f815e263a60853a7dca8a6 Mon Sep 17 00:00:00 2001
+From: Zhang Ze <zhangze@rvcore.com>
+Date: Thu, 24 Nov 2022 18:08:50 +0800
+Subject: [PATCH] forbid sv57 in qemuriscv64
+
+---
+ target/riscv/csr.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 235f2a011e..fa32336201 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -854,7 +854,7 @@ static const char valid_vm_1_10_64[16] = {
+     [VM_1_10_MBARE] = 1,
+     [VM_1_10_SV39] = 1,
+     [VM_1_10_SV48] = 1,
+-    [VM_1_10_SV57] = 1
++    [VM_1_10_SV57] = 0
+ };
+ 
+ /* Machine Information Registers */
