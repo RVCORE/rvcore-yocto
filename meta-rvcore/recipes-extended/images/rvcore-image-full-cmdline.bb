@@ -78,6 +78,12 @@ IMAGE_INSTALL:append = " openjdk \
                         gdb \
                         gdbserver \
                         ${SPEC06_DEPENDENCY} \
+                        numactl \
+                        graphviz \
+                        lcov \
+                        libsdl2 \
+                        libsdl2-dev \
+                        libsdl2-staticdev \
 "
 
 IMAGE_ROOTFS_EXTRA_SPACE = "24194304"
