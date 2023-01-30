@@ -20,7 +20,7 @@ FORTRAN_TOOLS = " \
 "
 
 #for static compile spec06
-SPEC06_DEPENDENCY = " libstdc++-staticdev \
+SPEC06_DEPENDENCE = " libstdc++-staticdev \
                       libatomic-staticdev \
                       libgomp-staticdev \
                       glibc-staticdev \
@@ -32,6 +32,13 @@ SPEC06_DEPENDENCY = " libstdc++-staticdev \
                       libwww-perl \
                       libwww-perl-dev \
                       libio-stringy-perl \
+                      libhttp-message \
+                      libhttp-date \
+                      libclone \
+                      libio-compress-perl \
+                      libio-compress-lzma-perl \
+                      libio-socket-ssl-perl \
+                      libio-pty-perl \
                     "
 
 #                      libio-compress-perl 
@@ -77,13 +84,25 @@ IMAGE_INSTALL:append = " openjdk \
                         ldd \
                         gdb \
                         gdbserver \
-                        ${SPEC06_DEPENDENCY} \
+                        ${SPEC06_DEPENDENCE} \
                         numactl \
                         graphviz \
                         lcov \
                         libsdl2 \
                         libsdl2-dev \
                         libsdl2-staticdev \
+                        mill \
+                        mill-jars \
+                        verilator \
 "
 
 IMAGE_ROOTFS_EXTRA_SPACE = "24194304"
+
+
+set_board_env() {
+    mkdir -p ${IMAGE_ROOTFS}/etc/profile.d
+    echo "export COURSIER_CACHE=/usr/share/mill/cache" > ${IMAGE_ROOTFS}/etc/profile.d/set_board_env.sh
+    echo "export PERL5LIB=/usr/lib/perl5/vendor_perl/5.36.0/IO/:/usr/lib/perl5/vendor_perl/5.36.0/riscv64-linux/:/usr/lib/perl5/5.36.0/IO/:/usr/lib/perl5/5.36.0/riscv64-linux/" >> ${IMAGE_ROOTFS}/etc/profile.d/set_board_env.sh
+}
+
+ROOTFS_POSTPROCESS_COMMAND += "set_board_env;"
