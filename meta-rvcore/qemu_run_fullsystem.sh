@@ -16,4 +16,4 @@
 #*************************************************************************************
 
 
-MACHINE=qemuriscv64 runqemu nographic qemuparams="-smp 32 -m 16000"
+MACHINE=qemuriscv64 runqemu nographic qemuparams="-smp 20 -m 36000"
