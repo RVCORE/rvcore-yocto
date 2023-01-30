@@ -5,7 +5,7 @@ HOMEPAGE = "http://openjdk.java.net/"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3e0b59f8fac05c3c03d4a26bbda13f8f"
 
-SECTION = ""
+SECTION = "devel"
 
 DEPENDS = "autoconf-native make-native zip-native libpng libffi \
         fontconfig xserver-xorg  zlib json-c \
@@ -13,24 +13,16 @@ DEPENDS = "autoconf-native make-native zip-native libpng libffi \
         libxrender alsa-lib cups unzip-native"
 
 
-#BOOT_JDK_VERSION = "18.0.2.1"
-#           https://download.java.net/java/GA/jdk18.0.2.1/db379da656dc47308e138f21b33976fa/1/GPL/openjdk-${BOOT_JDK_VERSION}_linux-x64_bin.tar.gz;name=bootjdk  
 BOOT_JDK_VERSION = "19"
 SRC_URI = "git://github.com/openjdk/jdk.git;protocol=https;branch=master;name=openjdk \
            https://download.java.net/java/GA/jdk19/877d6127e982470ba2a7faa31cc93d04/36/GPL/openjdk-${BOOT_JDK_VERSION}_linux-x64_bin.tar.gz;name=bootjdk  \
            "
 
-#           file://patch;name=patch; \
-#PV = "20+git${SRCPV}"
-PV = "20"
-#SRCREV_openjdk = "44532009fff11884aa6f16a997b771c41cb01d2f"
-#new
-SRCREV_openjdk = "c5e0464098f8f7cd9c568c7b1c3a06139453eaab"
+PV = "20+git${SRCPV}"
 
-#SRC_URI[bootjdk.sha256sum]="3bfdb59fc38884672677cebca9a216902d87fe867563182ae8bc3373a65a2ebd"
+SRCREV_openjdk = "5dfc4ec7d94af9fe39fdee9d83b06101b827a3c6"
+
 SRC_URI[bootjdk.sha256sum]="f47aba585cfc9ecff1ed8e023524e8309f4315ed8b80100b40c7dcc232c12f96"
-#SRC_URI[patch.sha256sum] = "88888"
-
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
@@ -138,9 +130,9 @@ ALTERNATIVE_PRIORITY[rmiregistry] ?= "300"
 
 do_configure() {
 
-    EXTRA_CFLAGS=$CFLAGS 
-    EXTRA_CXXFLAGS=$CXXFLAGS 
-    EXTRA_LDFLAGS=$LDFLAGS
+    EXTRA_CFLAGS="${CFLAGS}"
+    EXTRA_CXXFLAGS="${CXXFLAGS}"
+    EXTRA_LDFLAGS="${LDFLAGS}"
 
     #if these vars being set, configure will warning
     unset CC CXX  CFLAGS  CXXFLAGS LDFLAGS
@@ -149,17 +141,21 @@ do_configure() {
         --with-sysroot=${STAGING_DIR_TARGET}     \
         --with-boot-jdk=${WORKDIR}/jdk-${BOOT_JDK_VERSION}/         \
         --disable-warnings-as-errors \
-        --with-debug-level=release \
-        --enable-javac-server=no \
+        --with-debug-level=slowdebug \
+        --with-native-debug-symbols=external \
+        --enable-javac-server \
+        --with-zlib=bundled \
         --with-native-debug-symbols=none  \
-        --with-extra-cflags="${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} $EXTRA_CFLAGS"     \
-        --with-extra-cxxflags="${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} $EXTRA_CXXFLAGS"   \
+        --with-extra-cflags="${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} ${EXTRA_CFLAGS}"   \
+        --with-extra-cxxflags="${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} ${EXTRA_CXXFLAGS}" \
         --with-extra-ldflags="$EXTRA_LDFLAGS"
 }
 
 do_compile() {
     make images
 }
+
+do_compile[network] = "1"
 
 
 do_install() {
