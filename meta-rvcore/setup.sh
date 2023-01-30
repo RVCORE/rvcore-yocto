@@ -65,12 +65,6 @@ bitbake-layers add-layer ../meta-rvcore
 bitbake-layers add-layer ../meta-clang
 bitbake-layers add-layer ../meta-openembedded/meta-perl/
 bitbake-layers add-layer ../meta-openembedded/meta-filesystems/
-bitbake-layers add-layer ../meta-selinux
-bitbake-layers add-layer ../meta-security
-bitbake-layers add-layer ../meta-virtualization
-bitbake-layers add-layer ../meta-cloud-services
-bitbake-layers add-layer ../meta-cgl/meta-cgl-common
-
 
 # fix the configuration
 echo "Creating auto.conf"
