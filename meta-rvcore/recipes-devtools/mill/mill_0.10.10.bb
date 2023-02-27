@@ -5,7 +5,7 @@ SUMMARY = "Your shiny new Java/Scala build tool!"
 HOMEPAGE = "https://github.com/com-lihaoyi/mill"
 LICENSE = "LGPL-3.0-only"
 SECTION = "devel/mill"
-DEPENDS = "curl-native openjdk-native openjdk-native bash-native"
+DEPENDS = "curl-native openjdk-binary-native bash-native"
 
 #ca-certificates-native 
 

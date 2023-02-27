@@ -10,19 +10,17 @@ SECTION = "devel"
 DEPENDS = "autoconf-native make-native zip-native libpng libffi \
         fontconfig xserver-xorg  zlib json-c \
         libxtst libxt libxrandr libxtst \
-        libxrender alsa-lib cups unzip-native"
+        libxrender alsa-lib cups unzip-native \
+        openjdk-binary-native"
 
 
 BOOT_JDK_VERSION = "19"
 SRC_URI = "git://github.com/openjdk/jdk.git;protocol=https;branch=master;name=openjdk \
-           https://download.java.net/java/GA/jdk19/877d6127e982470ba2a7faa31cc93d04/36/GPL/openjdk-${BOOT_JDK_VERSION}_linux-x64_bin.tar.gz;name=bootjdk  \
            "
 
 PV = "20+git${SRCPV}"
 
 SRCREV_openjdk = "5dfc4ec7d94af9fe39fdee9d83b06101b827a3c6"
-
-SRC_URI[bootjdk.sha256sum]="f47aba585cfc9ecff1ed8e023524e8309f4315ed8b80100b40c7dcc232c12f96"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
@@ -130,6 +128,8 @@ ALTERNATIVE_PRIORITY[rmiregistry] ?= "300"
 
 do_configure() {
 
+    NUM_CORES=$(expr ${@oe.utils.cpu_count()} / 2)
+
     EXTRA_CFLAGS="${CFLAGS}"
     EXTRA_CXXFLAGS="${CXXFLAGS}"
     EXTRA_LDFLAGS="${LDFLAGS}"
@@ -139,12 +139,13 @@ do_configure() {
     bash ${S}/configure                            \
         --openjdk-target=riscv64-unknown-linux  \
         --with-sysroot=${STAGING_DIR_TARGET}     \
-        --with-boot-jdk=${WORKDIR}/jdk-${BOOT_JDK_VERSION}/         \
+        --with-boot-jdk=${STAGING_DIR_NATIVE}/${libdir}/jvm/java-${BOOT_JDK_VERSION}-openjdk-riscv64/         \
         --disable-warnings-as-errors \
         --with-debug-level=slowdebug \
         --with-native-debug-symbols=external \
         --enable-javac-server \
         --with-zlib=bundled \
+        --with-num-cores=${NUM_CORES} \
         --with-native-debug-symbols=none  \
         --with-extra-cflags="${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} ${EXTRA_CFLAGS}"   \
         --with-extra-cxxflags="${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} ${EXTRA_CXXFLAGS}" \

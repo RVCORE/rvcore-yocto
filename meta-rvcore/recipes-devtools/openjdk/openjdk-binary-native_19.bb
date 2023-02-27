@@ -25,7 +25,6 @@ inherit native
 
 #SYSROOT_DIRS_NATIVE += "/usr/bin"
 
-
 do_install() {
 
     rm -rf ${D}${JDK_PREFIX}
