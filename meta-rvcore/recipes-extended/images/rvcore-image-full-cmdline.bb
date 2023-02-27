@@ -41,11 +41,6 @@ SPEC06_DEPENDENCE = " libstdc++-staticdev \
                       libio-pty-perl \
                     "
 
-#                      libio-compress-perl 
-#                      libio-compress-lzma-perl 
-#                      libio-socket-ssl-perl 
-#                      libio-pty-perl 
-
 # for compile verilator
 IMAGE_INSTALL:append = " openjdk \
                         openjdk-demo \
@@ -96,7 +91,7 @@ IMAGE_INSTALL:append = " openjdk \
                         verilator \
 "
 
-IMAGE_ROOTFS_EXTRA_SPACE = "24194304"
+IMAGE_ROOTFS_EXTRA_SPACE = "54194304"
 
 
 set_board_env() {
