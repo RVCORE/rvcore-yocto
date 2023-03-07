@@ -58,6 +58,7 @@ IMAGE_INSTALL:append = " openjdk \
                         binutils \
                         perl-misc \
                         go \
+                        go-runtime-dev \
                         go-helloworld \
                         vim \
                         time \
