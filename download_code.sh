@@ -22,12 +22,12 @@ git config --global http.sslVerify false
 repo init -u https://github.com/riscv/meta-riscv  -b master -m tools/manifests/riscv-yocto.xml
 repo sync -d -c
 
-BRANCH_NAME=20230130
+BRANCH_NAME=20230309
 
-repo start ${BRANCH_NAME} --rev d6e3efd54a3c1361fecf2a56c6f4f590fbe676d9 meta-riscv/
-repo start ${BRANCH_NAME} --rev dd137feabdad2e7a2b3d107c703aad577a2e79c7 openembedded-core/
-repo start ${BRANCH_NAME} --rev b986eac18b6a8bf633f5ef15f32f68de4c86173b openembedded-core/bitbake/
-repo start ${BRANCH_NAME} --rev ca7082caa800124b4e0a7b36175f60387d1e3f8c meta-openembedded/
+repo start ${BRANCH_NAME} --rev 880aa9b7e39502d196dcaf296cbf0efe0d585f50 meta-riscv/
+repo start ${BRANCH_NAME} --rev 3cf894b8a9c4fa14fcc7c7445e85e9ae3192b398 openembedded-core/
+repo start ${BRANCH_NAME} --rev e859ce61a7422425960342a47785468cef49caa1 openembedded-core/bitbake/
+repo start ${BRANCH_NAME} --rev eb0d072f9ecfa175c79b781fc62265914abeb94e meta-openembedded/
 
 #download clang layer
 if [ -d meta-clang ]
@@ -39,4 +39,4 @@ else
 	cd meta-clang
 fi
 
-git checkout -b ${BRANCH_NAME} 36d2b65f81542ea5e36664cfdc4d1b5763b9ba4b
+git checkout -b ${BRANCH_NAME} 87d41f7dd7a69bbf15973506faf113a83bd60511
