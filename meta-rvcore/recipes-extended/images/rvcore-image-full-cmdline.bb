@@ -19,6 +19,12 @@ FORTRAN_TOOLS = " \
     libgfortran-dev \
 "
 
+CLOUD_TOOLS = " \
+            kubernetes \
+            containerd \
+            runc \
+"
+
 #for static compile spec06
 SPEC06_DEPENDENCE = " libstdc++-staticdev \
                       libatomic-staticdev \
@@ -90,6 +96,7 @@ IMAGE_INSTALL:append = " openjdk \
                         mill \
                         mill-jars \
                         verilator \
+                        ${CLOUD_TOOLS} \
 "
 
 IMAGE_ROOTFS_EXTRA_SPACE = "54194304"
