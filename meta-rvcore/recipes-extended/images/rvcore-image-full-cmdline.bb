@@ -20,9 +20,13 @@ FORTRAN_TOOLS = " \
 "
 
 CLOUD_TOOLS = " \
+            containerd-opencontainers \
+            runc-opencontainers \
+            docker-moby \
+            docker-compose \
             kubernetes \
-            containerd \
-            runc \
+            kubeadm kubectl kubelet kube-proxy kubernetes-misc kubernetes-host \
+            kubernetes-cni \
 "
 
 #for static compile spec06

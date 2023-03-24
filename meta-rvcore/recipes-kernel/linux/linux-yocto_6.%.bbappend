@@ -1,5 +1,8 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
+include linux-yocto_virtualization.inc
+
+
 
 SRC_URI += " \
     ${@bb.utils.contains('MACHINE', 'qemuriscv64', 'file://qemusmp.cfg', '', d)} \
