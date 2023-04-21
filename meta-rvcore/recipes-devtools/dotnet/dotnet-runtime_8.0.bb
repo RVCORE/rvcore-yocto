@@ -9,7 +9,9 @@ DEPENDS = "cmake-native clang-cross-${TARGET_ARCH} zlib krb5 icu lttng-ust"
 #SRC_URI = "git://github.com/dotnet/runtime.git;protocol=https;branch=release/8.0-preview3"
 #SRCREV = "47bad717bd69883ec8f590ffbbfad63c868cbe55"
 
-SRC_URI = "git://github.com/clamp03/runtime.git;protocol=https;branch=riscv64_230220"
+SRC_URI = "git://github.com/clamp03/runtime.git;protocol=https;branch=riscv64_230220 \
+           file://0001-for-yocto-build.patch \
+           "
 SRCREV = "14dce32ae4991a65f998bcf5546ded66794cfea1"
 #SRCREV = "${AUTOREV}"
 
@@ -62,17 +64,11 @@ do_compile() {
 do_compile[network] = "1"
 
 do_install() {
-    install -d ${D}${bindir}/coreclr/
-    cp -rp ${S}/artifacts/bin/coreclr/linux.riscv64.${build_type}  ${D}${bindir}/coreclr/
-    rm -rf ${D}${bindir}/coreclr/linux.riscv64.${build_type}/crossgen2/
-    rm -rf ${D}${bindir}/coreclr/linux.riscv64.${build_type}/dotnet-pgo/
-    rm -rf ${D}${bindir}/coreclr/linux.riscv64.${build_type}/R2RTest/
-    rm -rf ${D}${bindir}/coreclr/linux.riscv64.${build_type}/R2RDump/
-    rm -rf ${D}${bindir}/coreclr/linux.riscv64.${build_type}/InjectResource/
+    install -d ${D}${bindir}/coreclr/linux.riscv64.${build_type}/IL
+    cp -rp ${S}/artifacts/bin/coreclr/linux.riscv64.${build_type}/corerun  ${D}${bindir}/coreclr/linux.riscv64.${build_type}
+    cp -rp ${S}/artifacts/bin/coreclr/linux.riscv64.${build_type}/libcoreclr.so  ${D}${bindir}/coreclr/linux.riscv64.${build_type}
+    cp -rp ${S}/artifacts/bin/coreclr/linux.riscv64.${build_type}/System.Private.CoreLib.dll ${D}${bindir}/coreclr/linux.riscv64.${build_type}
+    cp -rp ${S}/artifacts/bin/coreclr/linux.riscv64.${build_type}/IL/System.Private.CoreLib.dll ${D}${bindir}/coreclr/linux.riscv64.${build_type}/IL
 }
 
-INSANE_SKIP:${PN} += "ldflags already-stripped arch"
-
-#FILES:${PN}:append = "\
-#    ${bindir} \
-#"
+INSANE_SKIP:${PN} += "ldflags already-stripped"
