@@ -101,6 +101,8 @@ IMAGE_INSTALL:append = " openjdk \
                         mill-jars \
                         verilator \
                         ${CLOUD_TOOLS} \
+                        qemu \
+                        acl \
 "
 
 IMAGE_ROOTFS_EXTRA_SPACE = "54194304"
