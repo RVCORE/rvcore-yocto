@@ -103,6 +103,8 @@ IMAGE_INSTALL:append = " openjdk \
                         ${CLOUD_TOOLS} \
                         qemu \
                         acl \
+                        redis \
+                        tcl \
 "
 
 IMAGE_ROOTFS_EXTRA_SPACE = "54194304"
