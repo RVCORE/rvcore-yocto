@@ -8,3 +8,5 @@ INITRAMFS_SCRIPTS = "\
                     initramfs-boot \
                     "
 IMAGE_FEATURES += "empty-root-password"
+
+PACKAGE_INSTALL += "redis tcl"
