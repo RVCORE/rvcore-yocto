@@ -27,6 +27,7 @@ CLOUD_TOOLS = " \
             kubernetes \
             kubeadm kubectl kubelet kube-proxy kubernetes-misc kubernetes-host \
             kubernetes-cni \
+            nerdctl \
 "
 
 #for static compile spec06
