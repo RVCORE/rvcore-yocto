@@ -17,3 +17,6 @@ COMPATIBLE_MACHINE = "^(yinxing-fpga|qemuriscv64)$"
 
 KCONFIG_MODE:yinxing-fpga = "allnoconfig"
 KCONFIG_MODE:qemuriscv64 = "alldefconfig"
+
+#for yinxing-fpga machine, ramdisk image
+INITRAMFS_IMAGE:yinxing-fpga ?= "core-image-minimal-initramfs"
