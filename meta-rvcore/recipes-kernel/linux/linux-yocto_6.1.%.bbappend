@@ -8,6 +8,7 @@ include linux-yocto_virtualization.inc
 
 SRC_URI += " \
     ${@bb.utils.contains('MACHINE', 'qemuriscv64', 'file://qemusmp.cfg', '', d)} \
+    ${@bb.utils.contains('MACHINE', 'qemuriscv64', 'file://dpdk.cfg', '', d)} \
     ${@bb.utils.contains('MACHINE', 'qemuriscv64', 'file://qemukvm.cfg', '', d)} \
     ${@bb.utils.contains('MACHINE', 'qemuriscv64', 'file://0001-fix-linux-6.1.x-crash-caused-by-cpu_relax.patch', '', d)} \
     ${@bb.utils.contains('MACHINE', 'yinxing-fpga', 'file://defconfig', '', d)} \

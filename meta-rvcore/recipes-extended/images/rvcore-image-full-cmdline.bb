@@ -106,6 +106,7 @@ IMAGE_INSTALL:append = " openjdk \
                         acl \
                         redis \
                         tcl \
+                        dpdk \
 "
 
 IMAGE_ROOTFS_EXTRA_SPACE = "54194304"
