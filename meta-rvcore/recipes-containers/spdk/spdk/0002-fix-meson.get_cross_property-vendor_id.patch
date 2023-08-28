@@ -1,0 +1,27 @@
+From b9b52ec0c48ca0184289370b0de86ba95864739a Mon Sep 17 00:00:00 2001
+From: Zhang Ze <zhangze@rvcore.com>
+Date: Wed, 23 Aug 2023 08:53:13 +0800
+Subject: [PATCH] fix meson.get_cross_property vendor_id
+
+---
+ dpdk/config/riscv/meson.build | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/dpdk/config/riscv/meson.build b/dpdk/config/riscv/meson.build
+index 07d7d9da23..d3f1d572bc 100644
+--- a/dpdk/config/riscv/meson.build
++++ b/dpdk/config/riscv/meson.build
+@@ -84,8 +84,8 @@ if not meson.is_cross_build()
+     endif
+ else
+     # cross build
+-    vendor_id = meson.get_cross_property('vendor_id')
+-    arch_id = meson.get_cross_property('arch_id')
++    vendor_id = meson.get_cross_property('vendor_id', 'generic')
++    arch_id = meson.get_cross_property('arch_id', 'generic')
+ endif
+ 
+ if not vendors.has_key(vendor_id)
+-- 
+2.34.1
+

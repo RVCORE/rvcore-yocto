@@ -16,4 +16,20 @@
 #*************************************************************************************
 
 
-MACHINE=qemuriscv64 runqemu nographic qemuparams="-smp 20 -m 36000"
+#IOMMU_DEVICE="-device virtio-iommu-pci"
+#IOMMU_DEVICE="-device virtio-iommu"
+#IOMMU_DEVICE="-device vfio-pci"	#for transport transfer into guest
+#DISK_DRIVER="-device virtio-blk-pci,drive=nvm,iommu_platform=true,disable-legacy=on"
+
+#DISK_DRIVER="-device virtio-blk-device,drive=nvm,iommu_platform=true"
+
+
+#make nvme dist for spdk
+#qemu-img create -f qcow2 nvme.qcow 1G
+
+DISK_DRIVER="-device nvme,drive=nvm,serial=testnvme"
+SECOND_DISK="-drive file=/home/zhangze/nvme.qcow,if=none,id=nvm"
+
+MACHINE=qemuriscv64 runqemu nographic qemuparams="-smp 20 -m 36000 $DISK_DRIVER $SECOND_DISK $IOMMU_DEVICE"
+
+

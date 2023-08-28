@@ -52,6 +52,14 @@ SPEC06_DEPENDENCE = " libstdc++-staticdev \
                       libio-pty-perl \
                     "
 
+#SPDK
+SPDK_DEPENDS = " spdk \
+                 spdk-examples \
+                 spdk-scripts \
+                 spdk-dev \
+                 spdk-staticdev \
+"
+
 # for compile verilator
 IMAGE_INSTALL:append = " openjdk \
                         openjdk-demo \
@@ -107,6 +115,7 @@ IMAGE_INSTALL:append = " openjdk \
                         redis \
                         tcl \
                         dpdk \
+                        ${SPDK_DEPENDS} \
 "
 
 IMAGE_ROOTFS_EXTRA_SPACE = "54194304"
