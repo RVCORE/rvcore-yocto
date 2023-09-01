@@ -27,8 +27,8 @@
 #make nvme dist for spdk
 #qemu-img create -f qcow2 nvme.qcow 1G
 
-DISK_DRIVER="-device nvme,drive=nvm,serial=testnvme"
-SECOND_DISK="-drive file=/home/zhangze/nvme.qcow,if=none,id=nvm"
+#DISK_DRIVER="-device nvme,drive=nvm,serial=testnvme"
+#SECOND_DISK="-drive file=/home/zhangze/nvme.qcow,if=none,id=nvm"
 
 MACHINE=qemuriscv64 runqemu nographic qemuparams="-smp 20 -m 36000 $DISK_DRIVER $SECOND_DISK $IOMMU_DEVICE"
 

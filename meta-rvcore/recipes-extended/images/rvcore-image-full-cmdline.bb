@@ -60,6 +60,18 @@ SPDK_DEPENDS = " spdk \
                  spdk-staticdev \
 "
 
+GCC_TOOLS = "gcc gcc-symlinks gcc-plugins \
+               gcc-dev \
+               gcc-doc \
+               gcov gcov-symlinks \
+               g++ g++-symlinks\
+               cpp cpp-symlinks \
+               libgomp \
+               libgomp-dev \
+               libgomp-staticdev \
+"
+
+
 # for compile verilator
 IMAGE_INSTALL:append = " openjdk \
                         openjdk-demo \
@@ -68,14 +80,9 @@ IMAGE_INSTALL:append = " openjdk \
                         e2fsprogs \
                         e2fsprogs-resize2fs \
                         python3-pip \
-                        gcc gcc-symlinks gcc-plugins \
-                        gcc-dev \
-                        gcc-doc \
-                        gcov gcov-symlinks \
-                        g++ g++-symlinks\
-                        cpp cpp-symlinks \
                         binutils \
                         perl-misc \
+                        ${GCC_TOOLS} \
                         go \
                         go-runtime-dev \
                         go-helloworld \
