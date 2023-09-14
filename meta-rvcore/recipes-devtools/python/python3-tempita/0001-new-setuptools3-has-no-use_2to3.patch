@@ -1,0 +1,22 @@
+From 984e1e41762dca0302fdc98cfcc071ce8e415bfe Mon Sep 17 00:00:00 2001
+From: Zhang Ze <zhangze@rvcore.com>
+Date: Wed, 13 Sep 2023 16:57:16 +0800
+Subject: [PATCH] new setuptools3 has no use_2to3
+
+---
+ setup.py | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 5daba94..9b8f2bb 100644
+--- a/setup.py
++++ b/setup.py
+@@ -36,5 +36,4 @@ more to learn about it.
+       test_suite='nose.collector',
+       include_package_data=True,
+       zip_safe=True,
+-      use_2to3=True,
+       )
+-- 
+2.34.1
+
