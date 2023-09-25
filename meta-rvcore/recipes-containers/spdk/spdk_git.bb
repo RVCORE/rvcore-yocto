@@ -23,7 +23,7 @@ SRC_URI = "gitsm://github.com/spdk/spdk.git;protocol=https;branch=master; \
 "
 
 
-#PV = "v23.05+git${SRCPV}"
+PV = "v23.09+git${SRCPV}"
 
 SRCREV = "30b534c9a8dbb558f08ddc2bc73475b458349467"
 
@@ -38,7 +38,7 @@ def rust_tool(d, target_var):
     return "rust = %s" % repr(cmd)
 
 
-addtask write_config before do_configure
+addtask write_config before do_configure after do_patch
 do_write_config[vardeps] += "CC CXX LD AR NM STRIP READELF CFLAGS CXXFLAGS LDFLAGS RUSTC RUSTFLAGS"
 do_write_config() {
     # This needs to be Py to split the args into single-element lists

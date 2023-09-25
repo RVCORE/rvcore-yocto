@@ -17,19 +17,27 @@
 
 
 #IOMMU_DEVICE="-device virtio-iommu-pci"
+
 #IOMMU_DEVICE="-device virtio-iommu"
+#IOMMU_DEVICE="-device virtio-iommu-device"
+
 #IOMMU_DEVICE="-device vfio-pci"	#for transport transfer into guest
 #DISK_DRIVER="-device virtio-blk-pci,drive=nvm,iommu_platform=true,disable-legacy=on"
 
 #DISK_DRIVER="-device virtio-blk-device,drive=nvm,iommu_platform=true"
 
 
-#make nvme dist for spdk
+#1.make harddisk for spdk
 #qemu-img create -f qcow2 nvme.qcow 1G
 
-#DISK_DRIVER="-device nvme,drive=nvm,serial=testnvme"
-#SECOND_DISK="-drive file=/home/zhangze/nvme.qcow,if=none,id=nvm"
+#2.choose UIO or VFIO
 
-MACHINE=qemuriscv64 runqemu nographic qemuparams="-smp 20 -m 36000 $DISK_DRIVER $SECOND_DISK $IOMMU_DEVICE"
+#for SPDK to use NVME harddisk, which does not support IOMMU, so must use UIO
+#SECOND_DISK_DRIVE="-drive id=nvm,file=/home/zhangze/nvme.qcow,if=none"
+#SECOND_DISK_DEVICE="-device nvme,drive=nvm,serial=testnvme"
 
+#for harddisk supporting IOMMU, so SPDK can use VFIO
+#SECOND_DISK_DRIVE="-drive id=spdk_nvme,file=/home/zhangze/nvme.qcow,if=none"
+#SECOND_DISK_DEVICE="-device virtio-blk-pci,drive=spdk_nvme,serial=testnvme,iommu_platform=true,disable-legacy=on"
 
+MACHINE=qemuriscv64 runqemu nographic qemuparams="-smp 20 -m 36000 $SECOND_DISK_DRIVE $SECOND_DISK_DEVICE $IOMMU_DEVICE"
