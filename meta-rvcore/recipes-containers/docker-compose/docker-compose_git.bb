@@ -11,7 +11,7 @@ DEPENDS = " \
 SRCREV_FORMAT="compose_survey"
 SRCREV_compose = "b15df818c759b355b03ed70505ffa451301eb566"
 
-SRC_URI = "git://github.com/docker/compose;name=compose;branch=v2;protocol=https"
+SRC_URI = "git://github.com/docker/compose;name=compose;branch=main;protocol=https"
 
 include src_uri.inc
 
