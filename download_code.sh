@@ -19,7 +19,7 @@ git config --global http.postBuffer 524288000
 git config --global http.sslVerify false
 
 #download riscv repo
-repo init -u https://github.com/riscv/meta-riscv  -b master -m tools/manifests/riscv-yocto.xml
+repo init -u https://github.com/riscv/meta-riscv  -b 9e7fbe14da6bc2655a47c866527abf45c9c73045 -m tools/manifests/riscv-yocto.xml
 repo sync -d -c
 
 BRANCH_NAME=20230309
