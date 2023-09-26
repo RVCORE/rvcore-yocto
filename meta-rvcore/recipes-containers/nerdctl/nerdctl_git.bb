@@ -27,6 +27,9 @@ do_compile() {
     export https_proxy=http://192.168.100.199:1091
     cd ${S}/src/${GO_IMPORT}
     make
+
+    #make go downloaded source file deletable
+    chmod -R +w ${B}/pkg
 }
 
 #do_configure[noexec] = "1"
