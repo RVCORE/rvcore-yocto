@@ -2,8 +2,8 @@
 SUMMARY = "Promises, promises, promises."
 HOMEPAGE = "http://github.com/celery/vine"
 AUTHOR = "Ask Solem <ask@celeryproject.org>"
-LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=6fadb0e48ceb84b571372dd706ed76a0"
+LICENSE = "BSD-2-Clause"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=2d8960d4592a3b2359af2ef082dcfe16"
 
 SRC_URI = "https://files.pythonhosted.org/packages/66/b2/8954108816865edf2b1e0d24f3c2c11dfd7232f795bcf1e4164fb8ee5e15/vine-5.0.0.tar.gz"
 SRC_URI[md5sum] = "2fc3270a999cdc9341ba173360d62367"

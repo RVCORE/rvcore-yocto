@@ -2,8 +2,8 @@
 SUMMARY = "A cross-platform clipboard module for Python. (Only handles plain text for now.)"
 HOMEPAGE = "https://github.com/asweigart/pyperclip"
 AUTHOR = "Al Sweigart <al@inventwithpython.com>"
-LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=dc8ed8ba9f09f565f0fe63910e4ce0fc"
+LICENSE = "BSD-2-Clause"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=d29fcf340a7840ed70982a900403ed8f"
 
 SRC_URI = "https://files.pythonhosted.org/packages/a7/2c/4c64579f847bd5d539803c8b909e54ba087a79d01bb3aba433a95879a6c5/pyperclip-1.8.2.tar.gz"
 SRC_URI[md5sum] = "853603b2e8fa1b13622fdbe72d1fb201"
