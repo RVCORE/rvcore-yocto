@@ -1,0 +1,28 @@
+From 9e49347a3fb190058ea3fce975674cf1a3f9fce4 Mon Sep 17 00:00:00 2001
+From: Zhang Ze <zhangze@rvcore.com>
+Date: Wed, 5 Mar 2025 15:56:05 +0800
+Subject: [PATCH] fix dpdk build for riscv64 spdk build
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Zhang Ze <zhangze@rvcore.com>
+---
+ dpdkbuild/Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/dpdkbuild/Makefile b/dpdkbuild/Makefile
+index 68e5febfad..c4afcde7d0 100644
+--- a/dpdkbuild/Makefile
++++ b/dpdkbuild/Makefile
+@@ -132,6 +132,8 @@ DPDK_OPTS += -Dcpu_instruction_set=$(TARGET_ARCHITECTURE)
+ ifneq ($(CONFIG_CROSS_PREFIX),)
+ ifeq ($(findstring mingw,$(CONFIG_CROSS_PREFIX)),mingw)
+ DPDK_OPTS += --cross-file $(SPDK_ROOT_DIR)/dpdk/config/x86/cross-mingw
++else ifeq ($(findstring riscv64,$(CONFIG_CROSS_PREFIX)),riscv64)
++DPDK_OPTS += --cross-file $(SPDK_ROOT_DIR)/dpdk/config/riscv/meson.cross
+ else
+ $(error Automatic DPDK cross build is not supported. Please compile DPDK manually \
+ with e.g. `meson build --cross-file config/arm/arm64_armv8_linux_gcc`)
+-- 
+2.34.1
+

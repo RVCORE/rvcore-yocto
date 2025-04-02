@@ -11,16 +11,17 @@ DEPENDS = "autoconf-native make-native zip-native libpng libffi \
         fontconfig xserver-xorg  zlib json-c \
         libxtst libxt libxrandr libxtst \
         libxrender alsa-lib cups unzip-native \
-        openjdk-binary-native"
+        jdk-bin-native"
 
 
-BOOT_JDK_VERSION = "19"
-SRC_URI = "git://github.com/openjdk/jdk.git;protocol=https;branch=master;name=openjdk \
+BOOT_JDK_VERSION = "23.0.2"
+SRC_URI = "git://github.com/openjdk/jdk;protocol=https;branch=master;name=openjdk \
            "
+SRC_URI[openjdk.sha256sum] = "c46e9682cfbfc6d502dce956dd6b075d5c0b19ab816f2347d3e5f0ad63b76264"
 
-PV = "20+git${SRCPV}"
+PV = "25+git${SRCPV}"
 
-SRCREV_openjdk = "5dfc4ec7d94af9fe39fdee9d83b06101b827a3c6"
+SRCREV_openjdk = "bb41df44d95cb4cadb8a18b3f999d35e169b35d3"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
@@ -137,7 +138,7 @@ do_configure() {
     #if these vars being set, configure will warning
     unset CC CXX  CFLAGS  CXXFLAGS LDFLAGS
     bash ${S}/configure                            \
-        --openjdk-target=riscv64-unknown-linux  \
+        --openjdk-target=riscv64-oe-linux  \
         --with-sysroot=${STAGING_DIR_TARGET}     \
         --with-boot-jdk=${STAGING_DIR_NATIVE}/${libdir}/jvm/java-${BOOT_JDK_VERSION}-openjdk-riscv64/         \
         --disable-warnings-as-errors \
@@ -199,3 +200,5 @@ FILES:${PN}-doc:append = "\
     ${JDK_PREFIX}/man \
 "
 
+
+INSANE_SKIP:${PN}-dbg += "buildpaths"

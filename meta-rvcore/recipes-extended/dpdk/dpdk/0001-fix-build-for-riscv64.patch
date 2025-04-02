@@ -1,0 +1,44 @@
+From a2c83df07eab8f0e651f87b97356a10809a7ab49 Mon Sep 17 00:00:00 2001
+From: Zhang Ze <zhangze@rvcore.com>
+Date: Tue, 4 Mar 2025 12:25:53 +0800
+Subject: [PATCH] fix build for riscv64
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Zhang Ze <zhangze@rvcore.com>
+---
+ config/meson.build       | 2 ++
+ config/riscv/meson.build | 4 ++--
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/config/meson.build b/config/meson.build
+index b6b3558e11..dd3415cfb2 100644
+--- a/config/meson.build
++++ b/config/meson.build
+@@ -166,6 +166,8 @@ if cpu_instruction_set == 'generic'
+     endif
+ endif
+ 
++cpu_instruction_set = 'rv64gc'
++
+ dpdk_conf.set('RTE_MACHINE', cpu_instruction_set)
+ machine_args = []
+ 
+diff --git a/config/riscv/meson.build b/config/riscv/meson.build
+index 7562c6cb99..8b1215b4cf 100644
+--- a/config/riscv/meson.build
++++ b/config/riscv/meson.build
+@@ -84,8 +84,8 @@ if not meson.is_cross_build()
+     endif
+ else
+     # cross build
+-    vendor_id = meson.get_external_property('vendor_id')
+-    arch_id = meson.get_external_property('arch_id')
++    vendor_id = 'generic'
++    arch_id = 'generic'
+ endif
+ 
+ if not vendors.has_key(vendor_id)
+-- 
+2.34.1
+

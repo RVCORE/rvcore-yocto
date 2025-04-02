@@ -1,0 +1,37 @@
+From 2c107997de8b04d969e3ee08f94bcf8096095aa9 Mon Sep 17 00:00:00 2001
+From: Zhang Ze <zhangze@rvcore.com>
+Date: Wed, 5 Mar 2025 16:35:00 +0800
+Subject: [PATCH] disable ISAL and arc4random
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Zhang Ze <zhangze@rvcore.com>
+---
+ CONFIG | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CONFIG b/CONFIG
+index 5e91cf9587..2a26a44548 100644
+--- a/CONFIG
++++ b/CONFIG
+@@ -169,7 +169,7 @@ CONFIG_OCF_PATH=
+ CONFIG_CUSTOMOCF=n
+ 
+ # Build ISA-L library
+-CONFIG_ISAL=y
++CONFIG_ISAL=n
+ 
+ # Build ISA-L-crypto library
+ CONFIG_ISAL_CRYPTO=y
+@@ -204,7 +204,7 @@ CONFIG_USDT=n
+ CONFIG_IDXD_KERNEL=n
+ 
+ # arc4random is available in stdlib.h
+-CONFIG_HAVE_ARC4RANDOM=n
++CONFIG_HAVE_ARC4RANDOM=y
+ 
+ # uuid_generate_sha1 is available in uuid/uuid.h
+ CONFIG_HAVE_UUID_GENERATE_SHA1=n
+-- 
+2.34.1
+

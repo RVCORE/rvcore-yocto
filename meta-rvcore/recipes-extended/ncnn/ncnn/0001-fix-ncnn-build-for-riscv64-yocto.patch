@@ -1,0 +1,32 @@
+From 917e2868437eb378a69505eff6c44e35065a7564 Mon Sep 17 00:00:00 2001
+From: Zhang Ze <zhangze@rvcore.com>
+Date: Wed, 26 Mar 2025 10:08:04 +0800
+Subject: [PATCH] fix ncnn build for riscv64 yocto
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Zhang Ze <zhangze@rvcore.com>
+---
+ src/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 911b2c0a5..2bb885b3d 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -683,10 +683,10 @@ if(NCNN_TARGET_ARCH STREQUAL "riscv" AND CMAKE_SIZEOF_VOID_P EQUAL 8 AND NOT C90
+             set(RISCV_MARCH_FLAG "${RISCV_MARCH_FLAG}_zvfh")
+         endif()
+     elseif(NOT NCNN_RUNTIME_CPU AND NCNN_XTHEADVECTOR)
+-        set(RISCV_MARCH_FLAG "-march=rv64gc_xtheadvector")
++        set(RISCV_MARCH_FLAG "-march=rv64gc")
+         if(NCNN_ZFH)
+             set(RISCV_MARCH_FLAG "${RISCV_MARCH_FLAG}_zfh")
+-            target_compile_options(ncnn PRIVATE -D__riscv_zvfh=1 -D__fp16=_Float16)
++            target_compile_options(ncnn PRIVATE -D__fp16=_Float16)
+         endif()
+     endif()
+     target_compile_options(ncnn PRIVATE ${RISCV_MARCH_FLAG})
+-- 
+2.34.1
+

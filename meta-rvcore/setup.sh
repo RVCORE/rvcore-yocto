@@ -15,12 +15,15 @@
 # See the Mulan PSL v2 for more details.
 #*************************************************************************************
 
+
 # Bootstrapper for buildbot slave
 
 DIR="build"
 MACHINE="qemuriscv64"
+DISTRO="rvcore-distro"
 CONFFILE="conf/auto.conf"
-BITBAKEIMAGE="rvcore-image-full-cmdline"
+# core-image-sato, corea-image-sato-sdk
+BITBAKEIMAGE="core-image-full-cmdline"
 
 # make sure sstate is there
 #echo "Creating sstate directory"
@@ -43,12 +46,8 @@ elif [ "${0##*/}" = "dash" ]; then
 fi
 # bootstrap OE
 echo "Init OE"
-
-#for our conf template
-export TEMPLATECONF=$(readlink -f meta-rvcore/conf/templates/default)
-
-export BASH_SOURCE="openembedded-core/oe-init-build-env"
-. ./openembedded-core/oe-init-build-env $DIR
+export BASH_SOURCE="poky/oe-init-build-env"
+. ./poky/oe-init-build-env $DIR
 
 # Symlink the cache
 #echo "Setup symlink for sstate"
@@ -58,13 +57,19 @@ export BASH_SOURCE="openembedded-core/oe-init-build-env"
 echo "Adding layers"
 bitbake-layers add-layer ../meta-openembedded/meta-oe
 bitbake-layers add-layer ../meta-openembedded/meta-python
+bitbake-layers add-layer ../meta-openembedded/meta-perl
 bitbake-layers add-layer ../meta-openembedded/meta-multimedia
+bitbake-layers add-layer ../meta-openembedded/meta-webserver
 bitbake-layers add-layer ../meta-openembedded/meta-networking
+bitbake-layers add-layer ../meta-openembedded/meta-filesystems
 bitbake-layers add-layer ../meta-riscv
 bitbake-layers add-layer ../meta-rvcore
+bitbake-layers add-layer ../meta-rvcore
+bitbake-layers add-layer ../meta-clang-revival
+bitbake-layers add-layer ../meta-python-ai
 bitbake-layers add-layer ../meta-clang
-bitbake-layers add-layer ../meta-openembedded/meta-perl/
-bitbake-layers add-layer ../meta-openembedded/meta-filesystems/
+bitbake-layers add-layer ../meta-virtualization
+bitbake-layers add-layer ../meta-python-ai
 
 # fix the configuration
 echo "Creating auto.conf"
@@ -74,34 +79,21 @@ if [ -e $CONFFILE ]; then
 fi
 cat <<EOF > $CONFFILE
 MACHINE ?= "${MACHINE}"
+DISTRO = "${DISTRO}"
 #IMAGE_FEATURES += "tools-debug"
 #IMAGE_FEATURES += "tools-tweaks"
 #IMAGE_FEATURES += "dbg-pkgs"
 # rootfs for debugging
 #IMAGE_GEN_DEBUGFS = "1"
 #IMAGE_FSTYPES_DEBUGFS = "tar.gz"
-EXTRA_IMAGE_FEATURES:append = " ssh-server-dropbear"
-EXTRA_IMAGE_FEATURES:append = " package-management"
 PACKAGECONFIG:append:pn-qemu-native = " sdl"
 PACKAGECONFIG:append:pn-nativesdk-qemu = " sdl"
-USER_CLASSES ?= "buildstats buildhistory buildstats-summary"
-
-require conf/distro/include/no-static-libs.inc
-require conf/distro/include/yocto-uninative.inc
-require conf/distro/include/security_flags.inc
-
-INHERIT += "uninative"
-
-DISTRO_FEATURES:append = " opengl ptest multiarch wayland pam  systemd "
-DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
-VIRTUAL-RUNTIME_init_manager = "systemd"
-HOSTTOOLS_NONFATAL:append = " ssh"
+USER_CLASSES:append = " buildstats buildhistory buildstats-summary"
 EOF
 
 echo "To build an image run"
 echo "---------------------------------------------------"
-echo "MACHINE=qemuriscv64  bitbake rvcore-image-full-cmdline"
-echo "MACHINE=yinxing-fpga bitbake virtual/kernel"
+echo "MACHINE=qemuriscv64 bitbake rvcore-image-full-cmdline"
 echo "---------------------------------------------------"
 echo ""
 echo "Buildable machine info"
