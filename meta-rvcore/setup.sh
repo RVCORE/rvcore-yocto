@@ -65,11 +65,9 @@ bitbake-layers add-layer ../meta-openembedded/meta-filesystems
 bitbake-layers add-layer ../meta-riscv
 bitbake-layers add-layer ../meta-rvcore
 bitbake-layers add-layer ../meta-rvcore
-bitbake-layers add-layer ../meta-clang-revival
-bitbake-layers add-layer ../meta-python-ai
 bitbake-layers add-layer ../meta-clang
+bitbake-layers add-layer ../meta-clang-revival
 bitbake-layers add-layer ../meta-virtualization
-bitbake-layers add-layer ../meta-python-ai
 
 # fix the configuration
 echo "Creating auto.conf"
