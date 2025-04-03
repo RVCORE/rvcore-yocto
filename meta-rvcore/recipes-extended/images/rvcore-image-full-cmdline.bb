@@ -41,7 +41,6 @@ IMAGE_INSTALL:append = "e2fsprogs \
                         kubernetes \
                         ncnn \
                         numactl \
-                        openvswitch \
                         graphviz \
                         lcov \
                         libsdl2 \
@@ -60,5 +59,8 @@ IMAGE_INSTALL:append = "e2fsprogs \
                         ipset \
                         perf \
 "
+
+
+#                        openvswitch
 
 IMAGE_ROOTFS_EXTRA_SPACE = "54194304"

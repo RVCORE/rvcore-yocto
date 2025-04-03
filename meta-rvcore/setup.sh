@@ -80,6 +80,8 @@ fi
 cat <<EOF > $CONFFILE
 MACHINE ?= "${MACHINE}"
 DISTRO = "${DISTRO}"
+INIT_MANAGER = "systemd"
+PACKAGE_CLASSES = "package_ipk"
 #IMAGE_FEATURES += "tools-debug"
 #IMAGE_FEATURES += "tools-tweaks"
 #IMAGE_FEATURES += "dbg-pkgs"
