@@ -68,6 +68,7 @@ bitbake-layers add-layer ../meta-rvcore
 bitbake-layers add-layer ../meta-clang
 bitbake-layers add-layer ../meta-clang-revival
 bitbake-layers add-layer ../meta-virtualization
+bitbake-layers add-layer ../meta-dpdk
 
 # fix the configuration
 echo "Creating auto.conf"
