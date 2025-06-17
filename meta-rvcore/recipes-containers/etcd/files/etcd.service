@@ -1,0 +1,25 @@
+[Unit]
+Description=etcd key-value store
+Documentation=https://github.com/etcd-io/etcd
+After=network-online.target local-fs.target remote-fs.target time-sync.target
+Wants=network-online.target local-fs.target remote-fs.target time-sync.target
+
+[Service]
+Type=notify
+EnvironmentFile=-/etc/etcd/etcd.conf
+WorkingDirectory=/var/lib/etcd/
+ExecStart=/usr/bin/etcd \
+        --cert-file=/etc/etcd/ssl/server.pem \
+        --key-file=/etc/etcd/ssl/server-key.pem \
+        --peer-cert-file=/etc/etcd/ssl/server.pem \
+        --peer-key-file=/etc/etcd/ssl/server-key.pem \
+        --trusted-ca-file=/etc/etcd/ssl/ca.pem \
+        --peer-trusted-ca-file=/etc/etcd/ssl/ca.pem \
+        --logger=zap
+
+Restart=on-failure
+RestartSec=10s
+LimitNOFILE=40000
+
+[Install]
+WantedBy=multi-user.target

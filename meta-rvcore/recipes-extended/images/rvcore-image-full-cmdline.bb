@@ -25,6 +25,7 @@ IMAGE_INSTALL:append = "e2fsprogs \
                         perl \
                         opencv \
                         time \
+                        nerdctl \
                         ccache \
                         bison \
                         git \
@@ -39,6 +40,8 @@ IMAGE_INSTALL:append = "e2fsprogs \
                         openjdk \
                         libvirt \
                         kubernetes \
+                        etcd \
+                        tcpdump \
                         ncnn \
                         numactl \
                         graphviz \

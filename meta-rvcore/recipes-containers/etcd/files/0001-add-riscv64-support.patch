@@ -1,0 +1,28 @@
+From 8aab874303615403f1faa35c979ccc098e96fc9f Mon Sep 17 00:00:00 2001
+From: Zhang Ze <zhangze@rvcore.com>
+Date: Tue, 27 May 2025 12:47:57 +0800
+Subject: [PATCH] add riscv64 support
+
+Upstream-Status: Inappropriate [other]
+
+Signed-off-by: Zhang Ze <zhangze@rvcore.com>
+---
+ server/etcdmain/etcd.go | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/server/etcdmain/etcd.go b/server/etcdmain/etcd.go
+index 03d2ba934..0b657d51c 100644
+--- a/server/etcdmain/etcd.go
++++ b/server/etcdmain/etcd.go
+@@ -264,7 +264,7 @@ func checkSupportArch() {
+ 	// To add a new platform, check https://github.com/etcd-io/website/blob/main/content/en/docs/${VERSION}/op-guide/supported-platform.md.
+ 	// The ${VERSION} is the etcd version, e.g. v3.5, v3.6 etc.
+ 	switch runtime.GOARCH {
+-	case "amd64", "arm64", "ppc64le", "s390x":
++	case "amd64", "arm64", "ppc64le", "s390x", "riscv64", "riscv32":
+ 		return
+ 	}
+ 	// unsupported arch only configured via environment variable
+-- 
+2.34.1
+
