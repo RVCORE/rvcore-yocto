@@ -24,6 +24,8 @@
 ```
    #prepare build environment
 
+   $ sudo apt install chrpath diffstat
+
    $ source meta-rvcore/setup.sh
 
    #build full image
