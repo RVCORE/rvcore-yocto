@@ -15,7 +15,7 @@ SRCREV = "55e5c0ba0550274720a334e519ccf23b2d8a60c3"
 
 inherit cmake
 
-S = "${WORKDIR}/git"
+#S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
 

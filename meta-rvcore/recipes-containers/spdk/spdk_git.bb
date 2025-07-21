@@ -41,7 +41,7 @@ PV = "v24.11+git${SRCPV}"
 
 SRCREV = "e01cb43b8578f9155d07a9bc6eee4e70a3af96b0"
 
-S = "${WORKDIR}/git"
+#S = "${WORKDIR}/git"
 #B = "${S}"
 
 def rust_tool(d, target_var):
