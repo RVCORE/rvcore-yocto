@@ -1,0 +1,26 @@
+From 7abec5b0dd165068d84aecfb937415fa3a482e58 Mon Sep 17 00:00:00 2001
+From: Zhang Ze <zhangze@rvcore.com>
+Date: Tue, 29 Jul 2025 16:28:20 +0800
+Subject: [PATCH 1/2] fix module build error
+
+Upstream-Status: Inappropriate [other]
+---
+ module/Makefile.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/module/Makefile.in b/module/Makefile.in
+index 859ba8649d..7b0f1c65e3 100644
+--- a/module/Makefile.in
++++ b/module/Makefile.in
+@@ -58,7 +58,7 @@ modules-Linux:
+ 		$(if @KERNEL_CROSS_COMPILE@,CROSS_COMPILE=@KERNEL_CROSS_COMPILE@) \
+ 		$(if @KERNEL_ARCH@,ARCH=@KERNEL_ARCH@) \
+ 		$(if @OBJTOOL_DISABLE_WERROR@,objtool=@abs_top_builddir@/scripts/objtool-wrapper) \
+-		M="$$PWD" @KERNEL_MAKE@ CONFIG_ZFS=m modules
++		M="source_module_dir"  MO="build_module_dir" CONFIG_ZFS=m modules
+ 
+ modules-FreeBSD:
+ 	+$(FMAKE)
+-- 
+2.34.1
+

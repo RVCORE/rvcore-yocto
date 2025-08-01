@@ -1,0 +1,26 @@
+From bffad8e84143965005576950a3d8541bacbd8de3 Mon Sep 17 00:00:00 2001
+From: Zhang Ze <zhangze@rvcore.com>
+Date: Tue, 29 Jul 2025 16:29:26 +0800
+Subject: [PATCH 2/2] fix infinite recursion error
+
+Upstream-Status: Inappropriate [other]
+---
+ module/lua/ldo.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/module/lua/ldo.c b/module/lua/ldo.c
+index 940ee0baaf..e50f616e3e 100644
+--- a/module/lua/ldo.c
++++ b/module/lua/ldo.c
+@@ -179,6 +179,8 @@ static void seterrorobj (lua_State *L, int errcode, StkId oldtop) {
+ #pragma GCC diagnostic ignored "-Winfinite-recursion"
+ #endif
+ 
++#pragma GCC diagnostic push
++#pragma GCC diagnostic ignored "-Winfinite-recursion"
+ l_noret luaD_throw (lua_State *L, int errcode) {
+   if (L->errorJmp) {  /* thread has an error handler? */
+     L->errorJmp->status = errcode;  /* set status */
+-- 
+2.34.1
+
